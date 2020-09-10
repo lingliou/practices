@@ -1,38 +1,44 @@
+// variables
 const urlBase = "https://api.punkapi.com/v2/beers";
-const filterABV = document.getElementById('filterABV');
-let optionABV ='';
+const filterABV = document.getElementById("filterABV");
+let optionsABV = "";
 
-// fliters
-fliterABV.addEventListener('change', e =>{
-    const value =e.target.value;
-
-    switch (value){
+// filters
+filterABV.addEventListener("change", e => {
+   const value = e.target.value; 
+   
+   switch (value) {
         case "all":
-            optionABV="";
+            optionsABV = "";
             break
         case "weak":
-            optionABV="abv_lt=4.6";
+            optionsABV = "abv_lt=4.6";
             break
         case "medium":
-            optionABV="abv_gt=4.5&abv_lt=7.6";
+            optionsABV = "abv_gt=4.5&abv_lt=7.6";
             break
-        case "medium":
-            optionABV="abv_gt=7.5";
+        case "strong":
+            optionsABV = "abv_gt=7.5";
             break
-    }
+   }
+   
+   getBeers();
 });
 
 async function getBeers() {
-    const url = urlBase + "?" +optionABV;
+    const url = urlBase + "?" + optionsABV;
+    console.log(url);
     // fetch
     const beerPromise = await fetch(url);
     const beers = await beerPromise.json();
-
+    
     // render data
     const beersDiv = document.querySelector('.beers');
-
+    
     let beerHtml = "";
-
+      
+    // Fill in the blanks with the rest of the data
+    
     beers.forEach(beer => {
        beerHtml += `
         <div class='beer-wrapper card'>
@@ -53,9 +59,9 @@ async function getBeers() {
                 </div>
             </div>
         </div>
-       `;
+       `; 
     });
-
+    
     beersDiv.innerHTML = beerHtml;
 }
 

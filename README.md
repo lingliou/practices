@@ -5,3 +5,5 @@ It includes:
 -Responsive web layout(hTML, CSS)
 -To do app (React SPA)
 -Meme generator(React form)
+-Beer app(fetch data from punk API)
+-Google Keep Clone (Javascript create app)
